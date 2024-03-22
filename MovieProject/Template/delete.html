@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-6"></div>
+<div class="container" >
+    <div class="col-6" style="align:center;">
+        <form method="post">
+            {% csrf_token %}
+            <h3>
+            Are You sure You Want To Delete {{movie.name}} this movie?
+            </h3>
+            <input type="submit">
+        </form>
+    </div>
+</div>
+{% endblock %}

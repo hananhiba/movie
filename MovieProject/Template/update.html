@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if movie.added_by == request.user %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Update</button>
+</form>
+{% else %}
+<div>
+    {% for msg in messages %}
+    <h2>{{msg}}</h2>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

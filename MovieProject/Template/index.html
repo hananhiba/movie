@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if category %}
+<h4>{{category.name}}</h4>
+<div class="container">
+    <div class="row">
+    </div>
+</div>
+<div class="container">
+       <div class="row">
+           <h2>{{category.name}}</h2>
+           <div class="container">
+               <div class="row">
+                   {% for i in movie %}
+                   <div class="col-md-4">
+                       <div class="card" style="width:18rem;">
+                           <img src="{{i.image.url}}" class="card-img-top" alt="...">
+                           <div class="card-body">
+                                    <h5 class="card-title">{{i.name}}</h5>
+                                    <p class="card-text">{{i.release_date}}</p>
+                                    <p class="card-text">{{i.category}}</p>
+                               {% if user.is_authenticated %}
+                                    <p><a class="btn btn-danger"  href="{% url 'Review:add_reviews' i.slug %}">Add Review</a></p>
+                               {% endif %}
+                                    <a href="{% url 'MovieApp:detail' i.id %}" class="btn btn-primary">Explore</a>
+                           </div>
+                       </div>
+                   </div>
+               {% endfor %}
+               </div>
+
+           </div>
+{% else %}
+<div class="container">
+                <div class="row">
+                    {% for i in movie %}
+                    <div class="col-md-4">
+                        <div class="card" style="width:18rem;">
+                            <img src="{{i.image.url}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{i.name}}</h5>
+                                <p class="card-text">{{i.release_date}}</p>
+                                <p class="card-text">{{i.category}}</p>
+                                <p>
+                                <a class="btn btn-danger"  href="{% url 'Review:add_reviews' i.slug %}">Add Review</a></p>
+                                <a href="{% url 'MovieApp:detail' i.id %}" class="btn btn-primary">Explore</a>
+                             </div>
+                         </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+{% endif %}
+{% endblock %}

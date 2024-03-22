@@ -1,0 +1,61 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary"  xmlns="http://www.w3.org/1999/html">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'MovieApp:AllMovies' %}"><b>Movies <em><sup>Now</sup></em></b></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">HOME</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'MovieApp:AllMovies' %}">ALL MOVIES</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'MovieApp:about' %}">ABOUT US</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            CATEGORIES
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">All Movies</a></li>
+
+            {% for c in movie_cat %}
+            <li><a class="dropdown-item" href="{% url 'MovieApp:MoviesByCategory' c.slug %}">{{c.name}}</a></li>
+
+            {% endfor %}
+
+          </ul>
+        </li>
+          {% if user.is_authenticated %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'MovieApp:add' %}">Add Movie</a>
+              </li>
+
+              <li><i><b>Hello <a class="custom_a" href="{% url 'credentials:user-view' user.id %}">{{user.username}}</a></b></i></li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'credentials:logout' %}">Logout</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'credentials:signup' %}">Register</a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'credentials:login' %}">Login</a>
+              </li>
+              {% endif %}
+      </ul>
+      <form class="d-flex" role="search" action="{% url 'Search:SearchResults' %}" method="get">
+          {% csrf_token %}
+        <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search" required>
+        <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
+    </div>
+  </div>
+</nav>

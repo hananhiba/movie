@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <br><img src="{{movie.image.url}}" width="400" height="600">
+        </div>
+        <div class="col-md-4">
+            <br><h2>{{movie.name}}</h2>
+            <h6>{{movie.category}}</h6>
+            <b>Release By</b>  <h4>{{movie.release_date}}</h4>
+            <p class="text-justify">{{movie.description}}</p>
+            <b>Starring</b>  <p>{{movie.actors}}</p>
+            <b>Youtube Trailer</b>  <p><a href="#">{{movie.link}}"</a></p><br>
+            <h5 class="card-title">Average Rating :{{movie.rating}} / 10</h5>
+                {% if movie.added_by == request.user %}
+                    <a class="btn btn-warning" href="{% url 'MovieApp:update' movie.id %}">Update</a>
+                    <a class="btn btn-danger"  href="{% url 'MovieApp:delete' movie.id %}">Delete</a>
+                {% else %}
+                    <p>Register to add movies to this website.
+                    <a href="{% url 'credentials:signup' %}" ><button>Signup</button></a></p>
+                {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+{% block content %}
+<div>
+    {% for review in mov.review_set.all %}
+    <div class="shadow card">
+        <div class="card-body">
+            <div class="card-title">Rating: {{ review.rating}} / 10</div>
+            <h3>Review: {{ review.review }}</h3>
+            <p>Reviewed by: {{review.user}} | {{review.movie}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="container" style="padding-top:80px;">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-2">
+            <div class="card" style="min-width:30rem;color:#000;width:200px;align:center;">
+                <img class="card-img-top my-image" style="padding-top:15px; height:300px;" src="{{mov.image.url}}" alt="{{mov.name}}">
+                <div class="card-body">
+                    <h6 style="font-size:16px;font-weight:bold;">Title: {{mov.name}}</h6>
+                    <p>{{mov.release_date}} || {{mov.category}}</p>
+                    <p>{{mov.description}}</p>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <label><b>Rate the Movie :</b></label><br>
+                        <input type="number" name="rating" min="0" max="10" step="1"><br>
+                        <label for="review"><b>Review:</b></label><br>
+                        <textarea id="review" name="review" rows="5" cols="50" placeholder="Enter Your Review"></textarea><br>
+                        <input type="date" name="date"><br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-2">
+            <span class="heading"> Reviews and Ratings</span>
+            <span class="fa fa-star checked" style="color:#ff4c17;"></span>
+            <span class="fa fa-star checked" style="color:#ff4c17;"></span>
+            <span class="fa fa-star checked" style="color:#ff4c17;"></span>
+            <span class="fa fa-star checked" style="color:#ff4c17;"></span>
+            <span class="fa fa-star" style="color:#ff4c17;"></span>
+            <hr style="border:3px solid #ff4c17">
+            {% for review in mov.review_set.all %}
+            <div class="shadow card">
+                <div class="card-body">
+                    <div class="card-title">Rating: {{ review.rating}}</div>
+                    <h3>Review: {{ review.review }}</h3>
+                    <p>Reviewed by: {{review.user}} | {{review.movie}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

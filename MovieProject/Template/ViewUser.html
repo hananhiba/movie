@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<pre>
+
+
+
+
+</pre>
+<div class="container">
+       <div class="row">
+           <div class="col-12">
+               <div class="card" style="min-width:30rem;color:black;width:200px;box-shadow: 3px 4px 5px #000;align:center;">
+                   <div class="card-body">
+                       <h5 class="card-title">USERNAME: {{view.username}}</h5><br>
+                       <h4 class="card-title">FIRST_NAME: {{view.first_name}}</h4><br>
+                       <h4 class="card-title">LAST_NAME: {{view.last_name}}</h4><br>
+                       <h4 class="card-title">EMAIL: {{view.email}}</h4><br>
+                   </div>
+               </div>
+           </div>
+      </div>
+</div>
+
+
+<pre>
+
+
+
+
+
+
+
+
+
+
+</pre>
+
+</body>
+</html>
+
+{% endblock %}

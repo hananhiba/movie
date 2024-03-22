@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .button {
+            background-color: #04AA6D; /* Green */
+             border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button1 {
+          background-color: white;
+          color: black;
+          border: 2px solid #04AA6D;
+        }
+
+        .button1:hover {
+          background-color: #04AA6D;
+          color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="container" style="background-color:#FFE4E1;align:center;">
+    <div class="row" >
+		<h1 style="padding-top:50px;font-weight:bold;align:center;">SignUp</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input class="text" type="text" name="username" placeholder="Enter username" required=""><br>
+            <input class="text"  type="text" name="first_name" placeholder="First Name" required=""><br>
+            <input class="text"  type="text" name="last_name" placeholder="Last Name" required=""><br>
+            <input class="text"  type="email" name="email" placeholder="Enter Your Email ID" required=""><br>
+            <input class="text"  type="password" name="password" placeholder="Password" required=""><br>
+            <input class="text"  type="password" name="confirm_password" placeholder="Confirm Password" required=""><br>
+            <input type="checkbox">
+			    <span><b>I Agree To The <a href="#">Terms & Conditions</a></b></span>
+
+            <br>
+            <button class="button button1" type="submit">SIGNUP</button>
+        </form>
+        <div class="col-4"></div>
+        <div>
+        {% for msg in messages %}
+        <h2>{{msg}}</h2>
+        {% endfor %}
+        </div>
+        <div style="align:center;padding-bottom:5px;">
+            <p>Already have an Account? <a href="{% url 'credentials:login' %}"> <button class="button button1">Login Now</button></a></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<pre>
+
+
+</pre>
+{% endblock %}
+
+
+
+
